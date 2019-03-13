@@ -9,14 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="app.bxvip.com.hbyinyin.ui.activity.SplashActivity"
+        <activity
+            android:name="app.bxvip.com.hbyinyin.ui.activity.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="app.bxvip.com.hbyinyin.ui.activity.MainActivity"/>
+        <activity android:name="app.bxvip.com.hbyinyin.ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.AboutActivity"/>
     </application>
 
 </manifest>
