@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.bxvip.com.hbyinyin.ui.activity.MainActivity">
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
+    tools:context="app.bxvip.com.hbyinyin.ui.activity.MainActivity"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+    <FrameLayout
+        android:id="@+id/cpntainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/default_splash_bg"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
+    </FrameLayout>
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:bb_tabXmlResource="@xml/bottombar_tabs" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

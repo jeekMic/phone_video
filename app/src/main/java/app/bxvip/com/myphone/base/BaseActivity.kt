@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.debug
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.verbose
+import org.jetbrains.anko.*
 
 /**
  * 所有activity的基类
@@ -16,7 +13,7 @@ abstract class BaseActivity: AppCompatActivity() ,AnkoLogger{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getlayoutId())
-
+        initView()
         initListener()
         initData()
 
@@ -26,6 +23,12 @@ abstract class BaseActivity: AppCompatActivity() ,AnkoLogger{
      * 初始化数据
      */
     open protected fun initData(){
+
+    }
+    /**
+     * 初始化数据
+     */
+    open protected fun initView(){
 
     }
 
@@ -46,4 +49,10 @@ abstract class BaseActivity: AppCompatActivity() ,AnkoLogger{
             toast(msg)
         }
     }
+    //开启一个activity并且销毁当前的activity
+    inline  fun <reified T:BaseActivity> startActivityAndFinish(){
+        startActivity<T>()
+        finish()
+    }
+
 }

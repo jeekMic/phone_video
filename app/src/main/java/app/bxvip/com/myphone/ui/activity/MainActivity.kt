@@ -7,12 +7,11 @@ import app.bxvip.com.myphone.R
 
 class MainActivity : BaseActivity() {
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(getlayoutId())
-//    }
-
     override fun getlayoutId(): Int {
         return R.layout.activity_main
+    }
+
+    override fun initView() {
+
     }
 }

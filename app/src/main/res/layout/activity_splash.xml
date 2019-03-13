@@ -4,18 +4,14 @@
     android:layout_height="match_parent">
 
 
-    <!--<ImageView-->
-    <!--android:id="@+id/imageView"-->
-    <!--android:scaleX="1.5"-->
-    <!--android:scaleY="1.5"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scaleType="centerCrop"-->
-    <!--android:src="@mipmap/default_splash_bg"/>-->
-
-<TextView
-    android:text="hjbkfsd"
+    <ImageView
+    android:id="@+id/imageView"
+    android:scaleX="1.5"
+    android:scaleY="1.5"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:scaleType="centerCrop"
+    android:src="@mipmap/default_splash_bg"/>
+
 
 </android.support.constraint.ConstraintLayout>
