@@ -1,12 +1,11 @@
 package app.bxvip.com.hbyinyin.ui.activity
 
 
-import android.os.Bundle
 import android.support.v7.widget.Toolbar
 
 import app.bxvip.com.hbyinyin.base.BaseActivity
 import app.bxvip.com.myphone.R
-import app.bxvip.com.myphone.ui.fragment.FragmentUtil
+import app.bxvip.com.myphone.util.FragmentUtil
 import app.bxvip.com.myphone.util.ToolBarManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find

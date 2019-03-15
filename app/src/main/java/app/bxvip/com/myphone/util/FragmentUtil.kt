@@ -1,7 +1,11 @@
-package app.bxvip.com.myphone.ui.fragment
+package app.bxvip.com.myphone.util
 
 import android.support.v4.app.Fragment
 import app.bxvip.com.myphone.R
+import app.bxvip.com.myphone.ui.fragment.HomeFragment
+import app.bxvip.com.myphone.ui.fragment.MvFragment
+import app.bxvip.com.myphone.ui.fragment.VBangFragment
+import app.bxvip.com.myphone.ui.fragment.YueDanFragment
 
 
 class FragmentUtil private constructor(){ //这样写表示私有化构造方法\
