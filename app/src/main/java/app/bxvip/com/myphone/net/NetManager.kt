@@ -37,13 +37,12 @@ class NetManager private constructor(){
 //                homeView.onError(e.message)
                 ThreadUtil.runOnMainThread(object:Runnable{
                     override fun run() {
-                        req.handler.onError(e.message)
+                        req.handler.onError(req.type,e.message)
                     }
                 })
             }
 
             override fun onResponse(call: Call, response: Response) {
-
                 val result = response.body()?.string()
 //                var gson = Gson()
 //                val fromJsonList = gson.fromJson<List<HomeItemBean>>(result, object : TypeToken<List<HomeItemBean>>() {}.type)
@@ -52,7 +51,7 @@ class NetManager private constructor(){
                 //刷新列表
                 ThreadUtil.runOnMainThread(object:Runnable{
                     override fun run() {
-                        req.handler.onSuccess(parseResult)
+                        req.handler.onSuccess(req.type,parseResult)
                     }
                 })
             }

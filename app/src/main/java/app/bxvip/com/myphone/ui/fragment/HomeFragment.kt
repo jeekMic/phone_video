@@ -28,12 +28,11 @@ class HomeFragment : BaseFragment() , HomeView {
 
     //监听事件，主要是设置RecycleView的相关事件信息
     override fun initListener() {
-        //线程的
+        //线性的布局 recycleView
         recycleView.layoutManager = LinearLayoutManager(context)
-        //适配
-
+        //设置适配器，适配器在上面进行了惰性加载
         recycleView.adapter = adapter
-        //初始化刷新控件
+        //初始化刷新控件，每转一圈还一种颜色
         refreshLayout.setColorSchemeColors(Color.RED,Color.YELLOW,Color.GREEN)
         //设置监听 这是 lambda的写法，里面实际上是重写了 onRefresh这个方法，当调用动画后就会调用这个监听
         refreshLayout.setOnRefreshListener { presenter.loadDatas() }

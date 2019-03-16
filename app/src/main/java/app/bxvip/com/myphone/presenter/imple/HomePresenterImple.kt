@@ -14,101 +14,49 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import okhttp3.*
 import java.io.IOException
 
-class HomePresenterImple(var homeView: HomeView) :HomePresenter{
+class HomePresenterImple(var homeView: HomeView?) :HomePresenter,ResponseHandler<List<HomeItemBean>>{
+    /**
+     * 解绑
+     */
+    fun destoryView(){
+       if (homeView!=null){
+           homeView = null
+       }
+   }
+
+
+    override fun onError(type:Int,msg: String?) {
+        homeView?.onError(msg)
+    }
+
+    override fun onSuccess(type:Int,result: List<HomeItemBean>?) {
+        when(type){
+            HomePresenter.TYPE_INIT_OR_REFRESH -> homeView?.loadSuccess(result)
+            HomePresenter.TYPE_LOAD_MORE -> homeView?.loadMore(result)
+        }
+    }
+//    override fun onError(msg: String?) {
+//        homeView.onError(msg)
+//    }
+//
+//    override fun onSuccess(result: List<HomeItemBean>?) {
+//        homeView.loadSuccess(result)
+//    }
     /**
      * 初始化数据或者刷新数据
      */
     override fun loadDatas() {
         //定义request
-        val request = HomeRequest(0, object : ResponseHandler<List<HomeItemBean>>{
-            override fun onError(msg: String?) {
-                homeView.onError(msg)
-            }
-
-            override fun onSuccess(result: List<HomeItemBean>?) {
-                homeView.loadSuccess(result)
-            }
-        })
-        NetManager.manager.sendRequest(request)
-
-
-
-//        var path = URLProviderUtils.getHomeUrl(0,20)
-//        println(path)
-//        var client = OkHttpClient()
-//        val request = Request.Builder()
-//                .url(path)
-//                .get()
-//                .build()
-//        //这里的object表示的是匿名内部类的对象
-//        client.newCall(request).enqueue(object : Callback {
-//            override fun onFailure(call: Call, e: IOException) {
-//                //回调到View层
-//                homeView.onError(e.message)
-//            }
-//
-//            override fun onResponse(call: Call, response: Response) {
-//
-//
-//                val result = response.body()?.string()
-//                var gson = Gson()
-//                val fromJsonList = gson.fromJson<List<HomeItemBean>>(result, object : TypeToken<List<HomeItemBean>>() {}.type)
-//                //刷新列表
-//                ThreadUtil.runOnMainThread(object:Runnable{
-//                    override fun run() {
-//                        homeView.loadSuccess(fromJsonList)
-//                    }
-//                })
-//            }
-//        })
+        HomeRequest( HomePresenter.TYPE_INIT_OR_REFRESH,0, this).execute()
+//        NetManager.manager.sendRequest(request)
 
     }
 
-    override fun loadMore(offset: Int) {
+    override fun loadMore(i: Int) {
         //定义request
-        val request = HomeRequest(offset, object : ResponseHandler<List<HomeItemBean>>{
-            override fun onError(msg: String?) {
-                homeView.onError(msg)
-            }
+        HomeRequest( HomePresenter.TYPE_LOAD_MORE,i, this).execute()
+//        NetManager.manager.sendRequest(request)
 
-            override fun onSuccess(result: List<HomeItemBean>?) {
-                homeView.loadMore(result)
-            }
-        })
-        NetManager.manager.sendRequest(request)
-
-//        var path = URLProviderUtils.getHomeUrl(offset,20)
-//        println(path)
-//        var client = OkHttpClient()
-//        val request = Request.Builder()
-//                .url(path)
-//                .get()
-//                .build()
-//        //这里的object表示的是匿名内部类的对象
-//        client.newCall(request).enqueue(object : Callback {
-//            override fun onFailure(call: Call, e: IOException) {
-//                homeView.onError(e.message)
-//            }
-//
-//            override fun onResponse(call: Call, response: Response) {
-//                ThreadUtil.runOnMainThread(object: Runnable{
-//                    override fun run() {
-//                        //隐藏刷新控件
-//
-//                    }
-//                })
-//
-//                val result = response.body()?.string()
-//                var gson = Gson()
-//                val fromJsonList = gson.fromJson<List<HomeItemBean>>(result, object : TypeToken<List<HomeItemBean>>() {}.type)
-//                //刷新列表
-//                ThreadUtil.runOnMainThread(object:Runnable{
-//                    override fun run() {
-//                        homeView.loadMore(fromJsonList)
-//                    }
-//                })
-//            }
-//        })
     }
 
 }
