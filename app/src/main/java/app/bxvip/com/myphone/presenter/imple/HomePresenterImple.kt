@@ -1,5 +1,6 @@
 package app.bxvip.com.myphone.presenter.imple
 
+import app.bxvip.com.myphone.base.BaseListPresenter
 import app.bxvip.com.myphone.net.HomeRequest
 import app.bxvip.com.myphone.net.NetManager
 import app.bxvip.com.myphone.net.ResponseHandler
@@ -18,7 +19,7 @@ class HomePresenterImple(var homeView: HomeView?) :HomePresenter,ResponseHandler
     /**
      * 解绑
      */
-    fun destoryView(){
+   override fun destoryView(){
        if (homeView!=null){
            homeView = null
        }
@@ -31,8 +32,8 @@ class HomePresenterImple(var homeView: HomeView?) :HomePresenter,ResponseHandler
 
     override fun onSuccess(type:Int,result: List<HomeItemBean>?) {
         when(type){
-            HomePresenter.TYPE_INIT_OR_REFRESH -> homeView?.loadSuccess(result)
-            HomePresenter.TYPE_LOAD_MORE -> homeView?.loadMore(result)
+            BaseListPresenter.TYPE_INIT_OR_REFRESH -> homeView?.loadSuccess(result)
+            BaseListPresenter.TYPE_LOAD_MORE -> homeView?.loadMore(result)
         }
     }
 //    override fun onError(msg: String?) {
@@ -47,14 +48,14 @@ class HomePresenterImple(var homeView: HomeView?) :HomePresenter,ResponseHandler
      */
     override fun loadDatas() {
         //定义request
-        HomeRequest( HomePresenter.TYPE_INIT_OR_REFRESH,0, this).execute()
+        HomeRequest( BaseListPresenter.TYPE_INIT_OR_REFRESH,0, this).execute()
 //        NetManager.manager.sendRequest(request)
 
     }
 
     override fun loadMore(i: Int) {
         //定义request
-        HomeRequest( HomePresenter.TYPE_LOAD_MORE,i, this).execute()
+        HomeRequest( BaseListPresenter.TYPE_LOAD_MORE,i, this).execute()
 //        NetManager.manager.sendRequest(request)
 
     }
