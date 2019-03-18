@@ -1,21 +1,14 @@
 package app.bxvip.com.myphone.presenter.imple
 
 import app.bxvip.com.myphone.base.BaseListPresenter
+import app.bxvip.com.myphone.base.BaseView
 import app.bxvip.com.myphone.net.HomeRequest
-import app.bxvip.com.myphone.net.NetManager
 import app.bxvip.com.myphone.net.ResponseHandler
 import app.bxvip.com.myphone.presenter.interf.HomePresenter
-import app.bxvip.com.myphone.util.ThreadUtil
-import app.bxvip.com.myphone.util.URLProviderUtils
 import app.bxvip.com.myphone.view.HomeView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.itheima.player.model.bean.HomeItemBean
-import kotlinx.android.synthetic.main.fragment_home.*
-import okhttp3.*
-import java.io.IOException
 
-class HomePresenterImple(var homeView: HomeView?) :HomePresenter,ResponseHandler<List<HomeItemBean>>{
+class HomePresenterImple(var homeView: BaseView<List<HomeItemBean>>?) :HomePresenter,ResponseHandler<List<HomeItemBean>>{
     /**
      * 解绑
      */
@@ -36,18 +29,11 @@ class HomePresenterImple(var homeView: HomeView?) :HomePresenter,ResponseHandler
             BaseListPresenter.TYPE_LOAD_MORE -> homeView?.loadMore(result)
         }
     }
-//    override fun onError(msg: String?) {
-//        homeView.onError(msg)
-//    }
-//
-//    override fun onSuccess(result: List<HomeItemBean>?) {
-//        homeView.loadSuccess(result)
-//    }
     /**
-     * 初始化数据或者刷新数据
+     * 初始化数据或者刷新数据，
      */
     override fun loadDatas() {
-        //定义request
+        //定义request，加载数据的时候将HomePresenter传递了进去，当成功的时候会回调上面的方法
         HomeRequest( BaseListPresenter.TYPE_INIT_OR_REFRESH,0, this).execute()
 //        NetManager.manager.sendRequest(request)
 

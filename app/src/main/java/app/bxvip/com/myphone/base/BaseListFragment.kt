@@ -12,6 +12,7 @@ import app.bxvip.com.myphone.view.HomeView
 import com.itheima.player.model.bean.HomeItemBean
 import com.itheima.player.model.bean.YueDanBean
 import kotlinx.android.synthetic.main.fragment_home.*
+import okhttp3.Response
 import org.jetbrains.anko.support.v4.toast
 
 /**
@@ -20,15 +21,16 @@ import org.jetbrains.anko.support.v4.toast
  * adapter -> BaseListAdapter
  * Presenter -> BaseListPresenter
  */
-class BaseListFragment : BaseFragment() , HomeView {
+abstract  class BaseListFragment<RESPONSE,ITEMBEAN,ITEMVIEW:View> : BaseFragment() , BaseView<RESPONSE> {
     //惰性加载适配器，只会加载一次
-    val adapter by lazy { HomeAdapter() }
-    val presenter by lazy { HomePresenterImple(this) }
+    val adapter by lazy { getSpecialAdapter() }
+    val presenter by lazy { getSpecialpresenter() }
     //加载视图给fragment
     override fun initView(): View {
         return  View.inflate(context, R.layout.fragment_home,null)
     }
-
+    abstract  fun getSpecialAdapter():BaseListAdapter<ITEMBEAN,ITEMVIEW>
+    abstract fun getSpecialpresenter():BaseListPresenter
     //监听事件，主要是设置RecycleView的相关事件信息
     override fun initListener() {
         //线性的布局 recycleView
@@ -67,12 +69,19 @@ class BaseListFragment : BaseFragment() , HomeView {
         toast("加载数据失败")
     }
 
-    override fun loadSuccess(fromJsonList: List<HomeItemBean>?) {
+    override fun loadSuccess(response:RESPONSE?) {
         refreshLayout.isRefreshing = false
-        adapter.updateList(fromJsonList)
+        adapter.updateList(getList(response))
     }
 
-    override fun loadMore(fromJsonList: List<HomeItemBean>?) {
-        adapter.loadMoreData(fromJsonList)
+
+
+    override fun loadMore(response:RESPONSE?) {
+        adapter.loadMoreData(getList(response))
     }
+
+    /**
+     * 返回结果中获取当前列表集合的方法
+     */
+    abstract fun getList(response: RESPONSE?): List<ITEMBEAN>
 }

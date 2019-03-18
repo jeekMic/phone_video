@@ -1,13 +1,14 @@
 package app.bxvip.com.myphone.presenter.imple
 
 import app.bxvip.com.myphone.base.BaseListPresenter
+import app.bxvip.com.myphone.base.BaseView
 import app.bxvip.com.myphone.net.ResponseHandler
 import app.bxvip.com.myphone.net.YueDanRequest
 import app.bxvip.com.myphone.presenter.interf.YueDanpresenter
 import app.bxvip.com.myphone.view.YueDanView
 import com.itheima.player.model.bean.YueDanBean
 
-class YueDanpresenterImpl(var yueDanView: YueDanView?) : YueDanpresenter, ResponseHandler<YueDanBean> {
+class YueDanpresenterImpl(var yueDanView: BaseView<YueDanBean>?) : YueDanpresenter, ResponseHandler<YueDanBean> {
 
     /**
      * 解绑
