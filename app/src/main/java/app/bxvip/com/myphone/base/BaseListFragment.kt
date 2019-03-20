@@ -17,6 +17,7 @@ import org.jetbrains.anko.support.v4.toast
 
 /**
  * 基类抽取
+ * 所有具有上啦刷新，下拉加载的基类
  * HomeView -> BaseView
  * adapter -> BaseListAdapter
  * Presenter -> BaseListPresenter
