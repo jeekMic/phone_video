@@ -6,7 +6,7 @@ import android.os.Parcelable
 
 /**
  * ClassName:VideoPlayBean
- * Description:传递给视频播放界面的bean类
+ * Description:传递给视频播放界面的bean类,需要进行初始化
  */
 data class VideoPlayBean(var id:Int,var title:String,var url:String):Parcelable{
     constructor(parcel: Parcel) : this(

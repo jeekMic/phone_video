@@ -25,6 +25,13 @@ class MvPagerAdapter(val context:Context,val list:List<MvAreaBean>?,fm: Fragment
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
+        //这里返回的值就会设置在tablelayout上面
+        /**
+         *        this.adapterChangeListener.setAutoRefresh(autoRefresh);
+        viewPager.addOnAdapterChangeListener(this.adapterChangeListener);
+        this.setScrollPosition(viewPager.getCurrentItem(), 0.0F, true);
+         在源码里面我们可以看到tablelayout实际上是拿到了这个name的
+         */
         return list?.get(position)?.name
     }
 }

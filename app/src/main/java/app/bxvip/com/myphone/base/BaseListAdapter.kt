@@ -59,7 +59,24 @@ abstract class BaseListAdapter<ITEMBEAN, ITEMVIEW:View>  : RecyclerView.Adapter<
         //条目刷新
 //        itemView.setData(data)
         refreshItemView(itemView, data)
+        print("点击事件")
+        itemView.setOnClickListener {
+            //RecycleView条目的点击事件
+            listener?.let {
+                it(data)
+                print("set innvoke")
+            }
+//            listener?.invoke(data)
+        }
     }
+
+
+    var listener: ((itemBiean:ITEMBEAN) -> Unit?)? = null
+    fun setMyListener(listener:(itemBiean:ITEMBEAN)-> Unit){
+        this.listener = listener
+    }
+
+
     abstract fun refreshItemView(itemView: ITEMVIEW,data:ITEMBEAN)
     //获取条目的view
     abstract fun getItemView(context: Context?):ITEMVIEW

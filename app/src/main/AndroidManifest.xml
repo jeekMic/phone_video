@@ -14,13 +14,17 @@
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="app.bxvip.com.hbyinyin.ui.activity.MainActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.AboutActivity"/>
+        <activity android:name=".ui.activity.VideoPlayerActivity"/>
+        <activity android:name=".ui.activity.TexttureVideoPlayerActivity"/>
+        <activity android:name=".ui.activity.VitamioVideoPlayerActivity"/>
+        <activity android:name=".ui.activity.IjkVideoPlayerActivity"/>
     </application>
 
 </manifest>

@@ -30,6 +30,6 @@ class MvItemView:RelativeLayout {
     fun setData(data: VideosBean) {
         artist.text = data.artistName
         title.text = data.title
-        Picasso.get().load(data.url).into(bg)
+        Picasso.get().load(data.playListPic).into(bg)
     }
 }
