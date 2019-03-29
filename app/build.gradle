@@ -48,6 +48,8 @@ dependencies {
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     implementation project(':vitamio')
     implementation 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
+
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
 //    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.6.2'
 //    implementation 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
 //    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'

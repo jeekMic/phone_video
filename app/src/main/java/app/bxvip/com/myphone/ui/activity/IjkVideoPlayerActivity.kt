@@ -23,6 +23,7 @@ class IjkVideoPlayerActivity: BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        //当窗口销毁的时候要释放资源
         videoView.stopPlayback()
     }
 }
