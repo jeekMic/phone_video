@@ -15,8 +15,7 @@ data class AudioBean(var data: String, var size: Long, var display_name: String,
             parcel.readString(),
             parcel.readLong(),
             parcel.readString(),
-            parcel.readString()) {
-    }
+            parcel.readString())
 
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

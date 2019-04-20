@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        ndk{
+        ndk {
             abiFilters 'armeabi-v7a', 'x86'
         }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,7 +26,6 @@ android {
     }
 
 }
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -39,8 +38,9 @@ dependencies {
     implementation 'org.jetbrains.anko:anko:0.10.5'
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okio:okio:1.17.2'
     //图片加载
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
@@ -48,16 +48,17 @@ dependencies {
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     implementation project(':vitamio')
     implementation 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
-
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
-//    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.6.2'
-//    implementation 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
-//
-//    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
-//    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
+    implementation 'fm.jiecao:jiecaovideoplayer:5.8.1'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    //    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.6.2'
+    //    implementation 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
+    //    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    //    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+    //    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
+    //    compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+    //    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
+    //    compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
+    //    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
+    implementation project(':netvideosender')
 }

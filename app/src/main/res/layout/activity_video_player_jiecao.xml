@@ -8,4 +8,40 @@
         android:id="@+id/videoplayer"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
+    <RadioGroup
+        android:layout_marginTop="20dp"
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mv_description"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mv_comment"
+            android:layout_weight="1"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mv_relative"
+            android:layout_weight="1"
+            android:button="@null"/>
+    </RadioGroup>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

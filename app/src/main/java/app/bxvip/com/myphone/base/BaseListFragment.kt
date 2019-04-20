@@ -71,7 +71,9 @@ abstract  class BaseListFragment<RESPONSE,ITEMBEAN,ITEMVIEW:View> : BaseFragment
     }
 
     override fun loadSuccess(response:RESPONSE?) {
-        refreshLayout.isRefreshing = false
+        if(refreshLayout!=null){
+            refreshLayout.isRefreshing = false
+        }
         adapter.updateList(getList(response))
     }
 
