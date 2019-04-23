@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 
 class MainActivity : BaseActivity() , ToolBarManager {
+
     override val toolbar: Toolbar by lazy { find<Toolbar>(R.id.toolbar)}
 
     override fun getlayoutId(): Int {
