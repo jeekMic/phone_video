@@ -18,7 +18,7 @@ import okio.BufferedSink
 import okhttp3.RequestBody
 import okhttp3.MultipartBody
 
-class TestActivity : AppCompatActivity() {
+class  TestActivity : AppCompatActivity() {
     //    var client:OkHttpClient? = null
 //    var response:Response? = null
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.AudioPlayerActivity"></activity>
+        <activity android:name=".ui.activity.AudioPlayerActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.TestActivity" />
         <activity
             android:name="app.bxvip.com.hbyinyin.ui.activity.SplashActivity"
@@ -31,7 +32,7 @@
         <activity android:name="app.bxvip.com.hbyinyin.ui.activity.MainActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.AboutActivity" />
-        <activity android:name=".ui.activity.VideoPlayerActivity" />
+        <activity android:name=".ui.activity.VideoPlayerActivity"/>
         <activity android:name=".ui.activity.TexttureVideoPlayerActivity" />
         <activity android:name=".ui.activity.VitamioVideoPlayerActivity" />
         <activity android:name=".ui.activity.IjkVideoPlayerActivity" />

@@ -1,5 +1,6 @@
 package app.bxvip.com.myphone.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,8 @@ import app.bxvip.com.myphone.adapter.PopAdapter
 import app.bxvip.com.myphone.inter.IService
 import app.bxvip.com.myphone.services.AudioService
 import app.bxvip.com.myphone.util.StringUtil
+import app.bxvip.com.myphone.widget.LyricView
+
 import app.bxvip.com.myphone.widget.PlayListpopuWindow
 import com.itheima.player.model.AudioBean
 import kotlinx.android.synthetic.main.activity_music_player_bottom.*
@@ -27,6 +30,8 @@ import kotlinx.android.synthetic.main.activity_music_player_top.artist
 import kotlinx.android.synthetic.main.item_mv.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import java.lang.ref.WeakReference
+import java.util.*
 
 class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener {
     //弹出的播放列表点击事件
@@ -60,14 +65,20 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
     var drawable: AnimationDrawable? = null
     var duration: Int = 0
     var MSG_PROGRESS = 0
-    val handler = object : Handler() {
-        override fun handleMessage(msg: Message?) {
-            when (msg?.what) {
-                MSG_PROGRESS -> startUpdateprogress()
+    val handler = MyHandler(this)
+
+    class MyHandler(activity: AudioPlayerActivity) : Handler() {
+        private val reference: WeakReference<AudioPlayerActivity>
+
+        init {
+            reference = WeakReference(activity)
+        }
+        override  fun handleMessage(msg: Message) {
+            when (msg.what) {
+                reference.get()?.MSG_PROGRESS ->  reference.get()?.startUpdateprogress()
             }
         }
     }
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.state -> uppdatePlayerState()
@@ -125,6 +136,10 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
      */
     @Subscribe
     fun onEventMainThread(audioBean: AudioBean) {
+        //设置播放歌曲的名称
+        lyricView.setSongName(audioBean.display_name)
+
+
         this.audioBean = audioBean
         //更细操作 歌手名称，歌曲名称
         audio_title.text = audioBean.display_name
@@ -138,9 +153,12 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
         //更新播放进度
         //获取总进度
         duration = iService?.getDuration()!!
+        //设置歌词播放的总进度
+        lyricView.setSongDuration(duration)
         progress_sk.max = duration
         startUpdateprogress()
         //更新播放模式图标
+        println("更新界面")
         updatePlayModeBtn()
     }
 
@@ -153,7 +171,7 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
         //更新进度数据
         progress?.let { updateProgress(it) }
         //定时获取进度
-        handler.sendEmptyMessageDelayed(MSG_PROGRESS, 1000)
+        handler.sendEmptyMessage(MSG_PROGRESS)
 
     }
 
@@ -163,6 +181,8 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
     private fun updateProgress(pro: Int) {
         progress.text = StringUtil.parseDuration(pro) + "/ " + StringUtil.parseDuration(duration)
         progress_sk.progress = pro
+        //更新歌词播放进度
+        lyricView.updateProgress(pro)
     }
 
     /**
@@ -178,17 +198,21 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
     private fun updatePlayerStateBtn() {
         //获取当前的状态
         val isPlaying = iService?.isPlaying()
-        println(isPlaying)
+        println("=====是否正在播放 ${isPlaying}")
         //根据当前的状态设置图标
         isPlaying.let {
             if (isPlaying!!) {
                 //播放
                 state.setImageResource(R.drawable.selector_btn_audio_play)
                 drawable?.start()
+
+                println("========播放动画开启")
                 handler.sendEmptyMessage(MSG_PROGRESS)
             } else {
                 state.setImageResource(R.drawable.selector_btn_audio_pause)
                 drawable?.stop()
+
+                println("========播放动画关闭")
                 //暂停
                 handler.removeMessages(MSG_PROGRESS)
             }
@@ -211,6 +235,11 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
         next.setOnClickListener(this)
         //播放列表点击事件
         playlist.setOnClickListener(this)
+        lyricView.setProgressListener {
+            //更新播放进度
+            iService?.seekTo(it)
+            updateProgress(it)
+        }
     }
 
     override fun initData() {
@@ -257,6 +286,7 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
 
     override fun onDestroy() {
         super.onDestroy()
+
         unbindService(conn)
         EventBus.getDefault().unregister(this)
         //清空handler发送的所有消息
@@ -267,7 +297,6 @@ class AudioPlayerActivity : BaseActivity(), View.OnClickListener, SeekBar.OnSeek
          * <var>obj</var> is <var>token</var>.  If <var>token</var> is null,
          * all callbacks and messages will be removed.
         */
-
     }
 
 }

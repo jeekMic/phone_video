@@ -24,7 +24,7 @@ class JieCaoVideoPlayerActivity : BaseActivity() {
         val videoPlayBean = intent.getParcelableExtra<VideoPlayBean>("item")
 //        videoplayer.setUp("http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4", "饺子闭眼睛" , Jzvd.SCREEN_NORMAL)
 //        Picasso.get().load("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640").into(videoplayer.thumbImageView)
-       //在应用外请求时通过intent.data请求的
+//        在应用外请求时通过intent.data请求的
 //        val data = intent.data
 //        println("data=$data")
 //        if (data == null) {
